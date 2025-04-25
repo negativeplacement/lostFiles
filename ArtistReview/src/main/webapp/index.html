@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!-- HTML comments like this... -->
+<html>
+
+<head>
+    <title>Title Nav Using Flexbox</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="icons/smiley.png">
+
+    
+    <link href="./style/indexStyle.css" rel="stylesheet" type="text/css" />
+    <link href="./style/dropDown.css" rel="stylesheet" type="text/css" />
+    <link href="./style/blog.css" rel="stylesheet" type="text/css" />
+    <link href="./style/revList.css" rel="stylesheet" type="text/css" />
+    <link href="style/clickSort.css" rel="stylesheet" type="text/css" />
+    <link href="style/login.css" rel="stylesheet" type="text/css" />
+    <link href="style/getProfile.css" rel="stylesheet" type="text/css" />
+    <link href="style/Logoff.css" rel="stylesheet" type="text/css" />
+    <link href="style/modalStyle.css" rel="stylesheet" type="text/css" />
+    <!--
+    <link href="style/main.css" rel="stylesheet" type="text/css" />
+    <link href="style/dropDown.css" rel="stylesheet" type="text/css" />
+    <link href="style/myDropDown.css" rel="stylesheet" type="text/css" />
+    <link href="style/usersComingSoon.css" rel="stylesheet" type="text/css" />
+    <link href="style/blog.css" rel="stylesheet" type="text/css" />
+    <link href="style/obj.css" rel="stylesheet" type="text/css" />
+    -->
+
+    <!-- You need these two CDNs (Content Delivery Network) to use react, their version numbers must match -->
+    <!-- changed version on 10-20-2022 from 16.3.1 to 18 for react and react-dom -->
+    <script src='https://unpkg.com/react@18/umd/react.production.min.js'></script>
+    <script src='https://unpkg.com/react-dom@18/umd/react-dom.production.min.js'></script>
+
+    <!-- This CDN lets you use JSX (looks like HTML tags in JS) -->
+    <script src='https://unpkg.com/babel-standalone@6.26.0/babel.js'></script>
+
+    <!-- This CDN lets you use React Routing -->
+    <script src='https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js'></script>
+
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- Put JS reusable first (these are called by CGFs or by the page like the dropDown FW). -->
+    <script src="_JS_reusable/dropDownFW.js"></script>
+    <script src="_JS_reusable/MakeObj.js"></script>
+    <script src="_JS_reusable/MakeRevList.js"></script>
+    <script src="_JS_reusable/ajax_alt.js"></script>
+    <script type="text/babel" src="_JS_reusable/filterObjList.js"></script>
+    <script src="_JS_reusable/jsSort.js"></script>
+    <script src="_JS_reusable/sortOrder.js"></script>
+    <script src="_JS_reusable/modalFw.js"></script>
+
+    <!-- JS Content Generating functions (these are called by the router). -->
+    <script src="_JS_CGF/ObjContentNoReact.js"></script>
+    <script src="_JS_CGF/UsersComingSoon.js"></script>
+    <script src="_JS_CGF/infoContent.js"></script>
+    <script src="_JS_CGF/MakeRevList_CGF.js"></script>
+
+    <!-- React reusable (these are called by CGFs). -->
+    <script type="text/babel" src="_React_reusable/ConvertEle.js"></script>
+    <script type="text/babel" src="_React_reusable/MakeRevListR.js"></script>
+
+    <!-- React Content Generating functions (these are called by the router) -->
+    <script type="text/babel" src="_React_CGF/Blog.js"></script>
+    <script type="text/babel" src="_React_CGF/Home.js"></script>
+    <script type="text/babel" src="_React_CGF/MakeRevListR_CGF.js"></script>
+    <script type="text/babel" src="_React_CGF/usersTable.js"></script>
+    <script type="text/babel" src="_React_CGF/artistReviewTable.js"></script>
+    <script type="text/babel" src="_React_CGF/Login.js"></script>
+    <script type="text/babel" src="_React_CGF/Logoff.js"></script>
+    <script type="text/babel" src="_React_CGF/getProfile.js"></script>
+
+    <!-- Any React scripts (which all have JSX) needs script type="text/babel" -->
+
+    <script type="text/babel" src="UserInsert.js"></script>
+    <script type="text/babel" src="ReviewInsert.js"></script>
+
+
+    <script type="text/babel">
+        "use strict";
+        dropDownFW({
+            dropHeaderClass: "dropHeader",
+            dropContentClass: "dropContent",
+            showClass: "show",
+            hideClass: "hide"
+        });
+
+        const Link = ReactRouterDOM.Link;
+        const Route = ReactRouterDOM.Route;
+
+        const App = () => (
+            <ReactRouterDOM.HashRouter>
+
+                <div id="titleNav">
+                    <div id="title">
+                        Website Title
+                    </div>
+                    <div id="nav">
+                        <div class="dropDown">
+                            <Link to="/home">Home</Link>
+                        </div>
+
+                        <div class="dropDown">
+                            <div class="dropHeader">Account</div>
+                            <div class="dropContent">
+                                <Link to="/userInsert">Register</Link> <br />
+                                <Link to="/login">Log In</Link> <br />
+                                <Link to="/logout">Log Out</Link> <br />
+                                <Link to="/profile">Profile</Link> <br />
+                            </div>
+                        </div>
+
+                        <div class="dropDown">
+                            <div class="dropHeader">Search</div>
+                            <div class="dropContent">
+                                <Link to="/users">Users (coming soon, Simple CGF)</Link> <br />
+                                <Link to="/myObj">My Objects (JS Obj Module)</Link> <br />
+                                <a target="_blank" href="./docs/oladele_database.pdf">My DB PDF</a> <br/>
+                                <Link to="/info">Info</Link> <br />
+                                <Link to="/review">Create Review (JS)</Link> <br />
+                                <Link to="/review_R">Create Review (React)</Link> <br /><br />
+                                <Link to="/usersDb">Show Users</Link> <br />
+                                <Link to="/otherDb">Show Other</Link> <br />
+                            </div>
+                        </div>
+
+                        <div class="dropDown">
+                            <Link to="/myBlog">Blog</Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content">
+                    <Route path="/" exact component={Home} />
+                    <Route path="/home" component={Home} />
+                    <Route path="/userInsert" component={UserInsert} />
+                    <Route path="/userUpdate/:id" component={UserInsert} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/logout" component={()=>Logoff("webUser/logOff")} />
+                    <Route path="/profile" component={()=>getProfile("webUser/getProfile")} />
+                    <Route path="/users" component={()=><ConvertEle ele={UsersComingSoon()} />} />
+                    <Route path="/myObj" component={()=><ConvertEle ele={ObjContentNoReact()} />} />
+                    <Route path="/info" component={()=><ConvertEle ele={infoContent()} />} />
+                    <Route path="/review" component={()=><ConvertEle ele={MakeRevList_CGF()} />} />
+                    <Route path="/review_R" component={MakeRevListR_CGF} />
+                    <Route path="/usersDb" component={()=>usersTable("webUser/getAll")} />
+                    <Route path="/reviewInsert" component={ReviewInsert} />
+                    <Route path="/reviewUpdate/:id" component={ReviewInsert} />
+                    <Route path="/otherDb" component={()=>artistReviewTable("artistReview/getAll")} />
+                    <Route path="/myBlog" component={Blog} />
+                </div>
+
+                <div id="footer">
+                    [Oladapo Emmanuel Oladele]
+                </div>
+
+            </ReactRouterDOM.HashRouter>
+        );
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.getProfile{
+    background-color: rgb(170, 170, 170);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.getProfile .getResult {
+    padding-top: 2rem;
+    margin:auto; 
+}
+
+.getProfile img {
+    width: 20%;
+    border-radius:0.5rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem #888888;
+}
