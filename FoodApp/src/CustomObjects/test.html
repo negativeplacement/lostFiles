@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Meal Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        .ingredient-card {
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: rgb(235, 228, 228);
+            width: 50%;
+        }
+
+        label {
+            margin-bottom: 4px;
+            width: 150px;
+            display: inline-block;
+        }
+
+        textarea, input {
+            margin-bottom: 6px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #mealName {
+            width: 50%;
+        }
+
+        #instructions {
+            width: 50%; 
+        }
+
+        .ingredient-name {
+            font-size: 16px;
+            width: 40%; 
+        }
+
+        .ingredient-quantity,
+        .ingredient-unit {
+            width: 10%;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Create a Meal</h1>
+    </div>
+
+    <div>
+        <label for="mealName">Name of Meal: </label>
+        <input type="text" id="mealName">
+    </div>
+
+    <div>
+        <label for="instructions">Instructions: </label>
+        <textarea id="instructions"></textarea>
+    </div>
+
+    <div id="ingredientsContainer">
+        <!-- First row for ingredients will be shown -->
+    </div>
+
+    <button onclick="addIngredientCard()">Add Ingredient</button>
+    <button onclick="createCustomMeal()">Create Custom Meal</button>
+
+    <div id="output"></div>
+
+    <script>
+        let ingredientsMap = new Map();
+
+        function addIngredientCard() {
+            const ingredientsContainer = document.getElementById('ingredientsContainer');
+
+            const ingredientCard = document.createElement('div');
+            ingredientCard.classList.add('ingredient-card');
+
+            const nameLabel = document.createElement('label');
+            nameLabel.textContent = 'Ingredient:';
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.classList.add('ingredient-name');
+            ingredientCard.appendChild(nameLabel);
+            ingredientCard.appendChild(nameInput);
+
+            const quantityLabel = document.createElement('label');
+            quantityLabel.textContent = 'Quantity:';
+            const quantityInput = document.createElement('input');
+            quantityInput.type = 'number';
+            quantityInput.classList.add('ingredient-quantity');
+            ingredientCard.appendChild(quantityLabel);
+            ingredientCard.appendChild(quantityInput);
+
+            const unitLabel = document.createElement('label');
+            unitLabel.textContent = 'Unit:';
+            const unitInput = document.createElement('input');
+            unitInput.type = 'text';
+            unitInput.classList.add('ingredient-unit');
+            ingredientCard.appendChild(unitLabel);
+            ingredientCard.appendChild(unitInput);
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = () => removeIngredientCard(ingredientCard);
+            ingredientCard.appendChild(removeButton);
+
+            ingredientsContainer.appendChild(ingredientCard);
+        }
+
+        function removeIngredientCard(card) {
+            const ingredientsContainer = document.getElementById('ingredientsContainer');
+            ingredientsContainer.removeChild(card);
+        }
+
+        function createCustomMeal() {
+        const mealName = document.getElementById('mealName').value.trim();
+        const instructions = document.getElementById('instructions').value.trim();
+
+        const ingredientCards = document.querySelectorAll('.ingredient-card');
+        ingredientCards.forEach(card => {
+            // Check if the card is still in the DOM
+            if (card.parentNode) {
+                const name = card.querySelector('.ingredient-name').value.trim();
+                const quantity = parseFloat(card.querySelector('.ingredient-quantity').value);
+                const unit = card.querySelector('.ingredient-unit').value.trim();
+
+                if (name !== '' && !isNaN(quantity) && unit !== '') {
+                    const ingredientKey = name.toLowerCase();
+                    if (ingredientsMap.has(ingredientKey)) {
+                        ingredientsMap.get(ingredientKey).quantity += quantity;
+                    } else {
+                        ingredientsMap.set(ingredientKey, { name, quantity, unit });
+                    }
+                }
+            }
+        });
+
+        const ingredients = Array.from(ingredientsMap.values());
+
+        if (ingredients.length > 0) {
+            const customMeal = { mealName, ingredients, instructions };
+            const customMealJSON = JSON.stringify(customMeal, null, 2);
+            document.getElementById('output').innerText = customMealJSON;
+        } else {
+            document.getElementById('output').innerText = "No ingredients provided";
+        }
+
+        // Clear the ingredientsMap and reset the form
+        ingredientsMap.clear();
+        document.getElementById('mealName').value = '';
+        document.getElementById('instructions').value = '';
+        document.getElementById('ingredientsContainer').innerHTML = '';
+    }
+    // Load an ingredient card on load
+    addIngredientCard();
+
+    </script>
+</body>
+</html>

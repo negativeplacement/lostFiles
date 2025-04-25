@@ -1,0 +1,89 @@
+
+.isUser{
+    position: relative;
+    display: inline-block;
+}
+
+.userDropDown{
+    height: 35px; 
+    width: fit-content; 
+    background-color: #3498DB;
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    border-style: none;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 900px;
+  }
+
+.userDropDown:hover, .userDropDown:focus{
+    background-color: #2980B9;
+}
+
+.getDropDown{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 100px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 0;
+    z-index: 1;
+}
+
+.getDropDown a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.getDropDown a:hover{
+    background-color: #ddd;
+}
+
+.show{
+    display: block;
+}
+
+.getLogin{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 950px;
+}
+
+@font-face {
+    font-family: 'Ingrid Darling';
+    src: url('../fonts/Ingrid_Darling/IngridDarling-Regular.ttf');
+    font-size: normal;
+}
+.cookbookPro{
+    color: black;
+    font-family: 'Ingrid Darling';
+    font-size: 35px;
+    word-wrap: break-word;
+  }
+
+.navbar{
+    background-color: #FFA6A6 !important; 
+}
+
+body {
+    margin-top: 40px; 
+}
+
+.getLogin{
+    background-color: #4285F4;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 950px;
+}
