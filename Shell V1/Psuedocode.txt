@@ -1,0 +1,133 @@
+Shell Psudeocode
+
+int main(){
+    while (1){
+      if(getLine() == -1){
+        print revelant errno message to the standard error;
+        continue;
+      }
+      Replace the newline character with a null character;
+      if(Line.contains(redirection || pipe)){
+        Call buildRPStructure();
+      } else{
+        Call buildStructure();
+      }
+      waitpid();
+    }
+}
+
+/*
+Shell Functions
+*/
+void buildPwd(){
+    if(getcwd() != NULL){
+      print current directory to the standard output;
+    } else{
+      print revelant errno message to the standard error;
+    }
+    return;
+}
+
+void buildCd(char *thisDir){
+  if(chdir() == -1){
+    print revelant errno message to the standard error;
+  }
+  return;
+}
+
+void buildWait(){
+    while(1){
+        wait(NULL);
+        if(errno == ECHILD){
+            break;
+        }
+    }
+}
+
+void buildHelp(){
+    printf("<Black Gallery TM>\n");
+    printf("Shell Commands: \n");
+    printf("help\tDisplay the help Manual\n");
+    printf("wait\tWait for all background processes to finish\n");
+    printf("pwd \tDisplay the current working directory\n");
+    printf("cd  \tChange the current working directory\n");
+    printf("exit\tExit the shell\n");
+}
+
+//Help Functions
+char *rmSpace(char *thisStr){
+    char *end;
+    while(isspace(*thisStr)) thisStr++;
+    if(*thisStr == 0)
+    return thisStr;
+    end = thisStr + strlen(thisStr) - 1;
+    while(end > thisStr && isspace((*end)))end--;
+    end[1] = '\0';
+    return thisStr;
+}
+
+char **tokenizeCommandLine(char *thisString){
+  Count words in the string;
+  Parse the string with the delimiter as either a redirection or pipe sign.
+  Place null as the last entry;
+  return stringArray;
+}
+
+char **tokenizeString(char *thisString, char *thisDelimiter){
+  Count words in the string;
+  Parse the string with the delimiter as either a redirection or pipe sign.
+  Place null as the last entry;
+  return stringArray;
+}
+
+
+char *buildPath(char *processName){
+  Traverse an array of environment variable;
+  open environment variable;
+  Traverse contents of variable;
+  if process found return full path;
+  if last environment path and process is not found return ?
+}
+
+void buildStructure(char *cmdLine){
+  Search the commandline if it contains the built-in call the relevant function for the command
+  Else parse the commandline into an array with the last entry as NUll
+  call execute command
+  If the commandline contained a ampersand, call wait function
+  return
+}
+
+void buildRPStructure(char *cmdLine){
+  if redirection
+  parse command with a null as the last entry
+  execute redirection
+  else if pipe
+  parse every entry with the last entry as null
+  execute pipe
+  if background call wait
+  return;    
+}
+
+void buildExecute(char *thisArg[], bool isBPrc){
+  fork 
+  execute process with execv
+}
+
+void buildSER(char *prcExe[], char *rFl[], char rID, bool isBPrc){
+  fork();
+  if stdin 
+  dup2(stdin);
+  execv
+  else if stdout
+  dup2(stdout);
+  execv
+  else if stdin and stdout
+  dup2(stdin);
+  dup2(stdout);
+}
+
+void buildSEP(char ***exeArgs, bool isBPrc){
+  fork();
+  execute each process concurently with execv
+  if last process close read end of pipe
+}
