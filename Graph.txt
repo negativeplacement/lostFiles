@@ -1,0 +1,413 @@
+Depth First Search
+______________________________Custom_Test______________________________
+<..>
+Number Of Vertices = -
+Vertices = {}
+Start Node = -
+Adjacency List:
+E{-} = []
+E{-} = []
+E{-} = []
+E{-} = []
+E{-} = []
+E{-} = []
+E{-} = []
+E{-} = []
+<?>
+
+<[]>
+Number Of Vertices = -
+Vertices = {}
+Start Node = -
+Adjacency Matrix:
+[~|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+[-|-|-|-|-|-|-|-|-]
+<?>
+______________________________Test_Cases(s)______________________________
+
+Test Case 1
+Number Of Vertices = 8
+Vertices = {a,b,c,d,e,f,g,h}
+Adjacency List:
+E{a} = [b,c,f]
+E{b} = [e]
+E{c} = [d]
+E{d} = [b,h]
+E{e} = [f,g,h]
+E{f} = [g]
+E{g} = []
+E{h} = [g]
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|g|h]
+[a|0|1|1|0|0|1|0|0]
+[b|0|0|0|0|1|0|0|0]
+[c|0|0|0|1|0|0|0|0]
+[d|0|1|0|0|0|0|0|1]
+[e|0|0|0|0|0|1|1|1]
+[f|0|0|0|0|0|0|1|0]
+[g|0|0|0|0|0|0|0|0]
+[h|0|0|0|0|0|0|1|0]
+
+Expected Results:
+  c       d    13    14
+  f       g     5    6
+  e       f     4    7
+  e       g     -    -
+  e       h     8    9
+  b       e     3    10
+  a       b     2    11
+  a       c    12    15
+  a       f     -    -
+  a       a     1    16
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> b -> e -> f -> g -> h -> c -> d
+Topological Sort: a -> c -> d -> b -> e -> h -> f -> g
+
+____________________________________________________________
+
+Test Case 2
+Number Of Vertices = 7
+Vertices = {a,b,c,e,f,g,z}
+Adjacency List:
+E{a} = [b,e]
+E{b} = [f,g]
+E{c} = [g,z]
+E{e} = [a]
+E{f} = [b,g,z]
+E{g} = [b,c,f]
+E{z} = [c,f]
+
+Adjacency Matrix:
+[~|a|b|c|e|f|g|z]
+[a|0|1|0|1|0|0|0]
+[b|0|0|0|0|1|1|0]
+[c|0|0|0|0|0|1|1]
+[e|1|0|0|0|0|0|0]
+[f|0|1|0|0|0|1|1]
+[g|0|1|1|0|1|0|0]
+[z|0|0|1|0|1|0|0]
+
+Expected Results:
+  c       z     6    7
+  g       c     5    8
+  f       g     4    9
+  f       z     -    -
+  b       f     3    10
+  b       g     -    -
+  a       b     2    11
+  a       e    12    13
+  a       a     1    14
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> b -> f -> g -> c -> z -> e
+Topological Sort: N/A
+
+____________________________________________________________
+
+Test Case 3
+Number Of Vertices = 8
+Vertices = {a,b,c,d,e,f,g,h}
+Adjacency List:
+E{a} = [c]
+E{b} = [c]
+E{c} = [d,e]
+E{d} = [f]
+E{e} = [f]
+E{f} = [g,h]
+E{g} = []
+E{h} = []
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|g|h]
+[a|0|0|1|0|0|0|0|0]
+[b|0|0|1|0|0|0|0|0]
+[c|0|0|0|1|1|0|0|0]
+[d|0|0|0|0|0|1|0|0]
+[e|0|0|0|0|0|1|0|0]
+[f|0|0|0|0|0|0|1|1]
+[g|0|0|0|0|0|0|0|0]
+[h|0|0|0|0|0|0|0|0]
+
+Expected Results:
+  b       b    15    16
+  f       g     5    6
+  f       h     7    8
+  d       f     4    9
+  c       d     3    10
+  c       e    11    12
+  a       c     2    13
+  a       a     1    14
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> c -> d -> f -> g -> h -> e -> b
+Topological Sort: b -> a -> c -> e -> d -> f -> h -> g
+
+____________________________________________________________
+
+Test Case 4
+Number Of Vertices = 7
+Vertices = {a,b,c,d,e,f,x}
+Adjacency List:
+E{a} = [c]
+E{b} = [a,d,e]
+E{c} = [b,d]
+E{d} = []
+E{e} = [d,x]
+E{f} = [c,d]
+E{x} = [f]
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|x]
+[a|0|0|1|0|0|0|0]
+[b|1|0|0|1|1|0|0]
+[c|0|1|0|1|0|0|0]
+[d|0|0|0|0|0|0|0]
+[e|0|0|0|1|0|0|1]
+[f|0|0|1|1|0|0|0]
+[x|0|0|0|0|0|1|0]
+
+Expected Results:
+  x       f     8    9
+  e       x     7    10
+  b       d     4    5
+  b       e     6    11
+  c       b     3    12
+  c       d     -    -
+  a       c     2    13
+  a       a     1    14
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> c -> b -> d -> e -> x -> f
+Topological Sort: N/A
+
+____________________________________________________________
+
+Test Case 5
+Number Of Vertices = 10
+Vertices = {a,b,c,d,e,f,g,h,i,j}
+Adjacency List:
+E{a} = [b,e]
+E{b} = [a,c,d]
+E{c} = [b,d]
+E{d} = [b,c]
+E{e} = [a,f,h]
+E{f} = [e,g]
+E{g} = [f]
+E{h} = [e,i,j]
+E{i} = [h,j]
+E{j} = [h,i]
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|g|h|i|j]
+[a|0|1|0|0|1|0|0|0|0|0]
+[b|1|0|1|1|0|0|0|0|0|0]
+[c|0|1|0|1|0|0|0|0|0|0]
+[d|0|1|1|0|0|0|0|0|0|0]
+[e|1|0|0|0|0|1|0|1|0|0]
+[f|0|0|0|0|1|0|1|0|0|0]
+[g|0|0|0|0|0|1|0|0|0|0]
+[h|0|0|0|0|1|0|0|0|1|1]
+[i|0|0|0|0|0|0|0|1|0|1]
+[j|0|0|0|0|0|0|0|1|1|0]
+
+Expected Results:
+  i       j     15   16
+  h       i     14   17
+  h       j     -    -
+  f       g     10   11
+  e       f     9    12
+  e       h     13   18
+  c       d     4    5
+  b       c     3    6
+  b       d     -    -
+  a       b     2    7
+  a       e     8    19
+  a       a     1    20
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> b -> c -> d -> e -> f -> g -> h -> i -> j
+Topological Sort: N/A
+
+____________________________________________________________
+
+Test Case 6
+Number Of Vertices = 8
+Vertices = {a,b,c,d,e,f,x,y}
+Adjacency List:
+E{a} = [b,d]
+E{b} = [c]
+E{c} = [a,d,f,x,y]
+E{d} = []
+E{e} = [a,f]
+E{f} = [d,e]
+E{x} = [c,y]
+E{y} = [f]
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|x|y]
+[a|0|1|0|1|0|0|0|0]
+[b|0|0|1|0|0|0|0|0]
+[c|1|0|0|1|0|1|1|1]
+[d|0|0|0|0|0|0|0|0]
+[e|1|0|0|0|0|1|0|0]
+[f|0|0|0|1|1|0|0|0]
+[x|0|0|1|0|0|0|0|1]
+[y|0|0|0|0|0|1|0|0]
+
+Expected Results:
+  x       y     11   12
+  f       e     7    8
+  c       d     4    5
+  c       f     6    9
+  c       x     10   13
+  c       y     -    -
+  b       c     3    14
+  a       b     2    15
+  a       d     -    -
+  a       a     1    16
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> b -> c -> d -> f -> e -> x -> y
+Topological Sort: N/A
+
+____________________________________________________________
+
+Test Case 7
+Number Of Vertices = 11
+Vertices = {a,b,c,d,e,f,g,h,i,j,k}
+Adjacency List:
+E{a} = [b,c]
+E{b} = [a,d]
+E{c} = [a]
+E{d} = [e,f]
+E{e} = [g,h]
+E{f} = [d,i]
+E{g} = []
+E{h} = []
+E{i} = [f,j]
+E{j} = [i,k]
+E{k} = [j]
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|g|h|i|j|k]
+[a|0|1|1|0|0|0|0|0|0|0|0]
+[b|1|0|0|1|0|0|0|0|0|0|0]
+[c|1|0|0|0|0|0|0|0|0|0|0]
+[d|0|0|0|0|1|1|0|0|0|0|0]
+[e|0|0|0|0|0|0|1|1|0|0|0]
+[f|0|0|0|1|0|0|0|0|1|0|0]
+[g|0|0|0|0|0|0|0|0|0|0|0]
+[h|0|0|0|0|0|0|0|0|0|0|0]
+[i|0|0|0|0|0|1|0|0|0|1|0]
+[j|0|0|0|0|0|0|0|0|1|0|0]
+[k|0|0|0|0|0|0|0|0|0|1|0]
+
+Expected Results:
+  j       k     13   14
+  i       j     12   15
+  f       i     11   16
+  e       g     5    6
+  e       h     7    8
+  d       e     4    9
+  d       f     10   17
+  b       d     3    18
+  a       b     2    19
+  a       c     20   21
+  a       a     1    22
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> b -> d -> e -> g -> h -> f -> i -> j -> k -> c
+Topological Sort: a -> c -> b -> d -> f -> i -> j -> k -> e -> h -> g
+
+____________________________________________________________
+
+Test Case 8
+Number Of Vertices = 12
+Vertices = {a,b,c,d,e,f,g,h,i,j,k,l}
+Adjacency List:
+E{a} = [b,c]
+E{b} = [a,d]
+E{c} = [a]
+E{d} = [b,e,f]
+E{e} = [d,g]
+E{f} = [d,h]
+E{g} = [e,i]
+E{h} = [j,k,l]
+E{i} = [g]
+E{j} = [h]
+E{k} = [h]
+E{l} = [h]
+
+Adjacency Matrix:
+[~|a|b|c|d|e|f|g|h|i|j|k|l]
+[a|0|1|1|0|0|0|0|0|0|0|0|0]
+[b|1|0|0|1|0|0|0|0|0|0|0|0]
+[c|1|0|0|0|0|0|0|0|0|0|0|0]
+[d|0|1|0|0|1|1|0|0|0|0|0|0]
+[e|0|0|0|1|0|0|1|0|0|0|0|0]
+[f|0|0|0|1|0|0|0|1|0|0|0|0]
+[g|0|0|0|0|1|0|0|0|1|0|0|0]
+[h|0|0|0|0|0|0|0|0|0|1|1|1]
+[i|0|0|0|0|0|0|1|0|0|0|0|0]
+[j|0|0|0|0|0|0|0|1|0|0|0|0]
+[k|0|0|0|0|0|0|0|1|0|0|0|0]
+[l|0|0|0|0|0|0|0|1|0|0|0|0]
+
+Expected Results:
+  h       j     12   13
+  h       k     14   15
+  h       l     16   17
+  f       h     11   18
+  g       i     6    7
+  e       g     5    8
+  d       e     4    9
+  d       f     10   19
+  b       d     3    20
+  a       b     2    21
+  a       c     22   23
+  a       a     1    24
+------  -----  ---  ----
+Parent  Stack  Pre  Post
+DFS: a -> b -> d -> e -> g -> i -> f -> h -> j -> k -> l -> c
+Topological Sort: a -> c -> b -> d -> f -> h -> l -> k -> j -> e -> g -> i
+
+____________________________________________________________
+
+Dijkstra's Algorithm
+
+Test Case
+Number Of Vertices = 6
+Vertices = {a,b,c,d,e,z}
+Adjacency Matrix:
+[~|a|b|c|d|e|z]
+[a|0|2|8|0|0|3]
+[b|2|0|4|2|0|0]
+[c|8|4|0|4|2|0]
+[d|0|2|4|0|3|4]
+[e|0|0|2|3|0|2]
+[z|3|0|0|4|2|0]
+
+Prim's Algorithm
+
+Test Case
+Number Of Vertices = 8
+Vertices = {a,b,c,d,e,f,s,t}
+Adjacency Matrix:
+[~|a|b|c|d|e|f|s|t]
+[a|0|5|0|7|0|0|6|0]
+[b|5|0|3|0|0|0|5|6]
+[c|0|3|0|0|0|3|0|6]
+[d|7|0|0|0|4|0|3|0]
+[e|0|0|0|4|0|4|4|3]
+[f|0|0|3|0|4|0|0|4]
+[s|6|5|0|3|4|0|0|6]
+[t|0|6|5|0|3|4|6|0]
